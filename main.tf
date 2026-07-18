@@ -70,7 +70,7 @@ resource "aws_s3_bucket_policy" "mywebsite" {
               "s3:GetObject"
           ],
           "Resource": [
-              "arn:aws:s3:::${var.bucket_name}/*"
+              "${aws_s3_bucket.mywebsite.arn}/*"
           ]
       }
   ]
