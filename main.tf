@@ -42,40 +42,9 @@ resource "aws_s3_bucket_public_access_block" "mywebsite" {
   ignore_public_acls      = false
   restrict_public_buckets = false
 }
-
-# Resource-6: aws_s3_bucket_acl
-resource "aws_s3_bucket_acl" "mywebsite" {
-  depends_on = [
-    aws_s3_bucket_ownership_controls.mywebsite,
-    aws_s3_bucket_public_access_block.mywebsite
-  ]
-  bucket = aws_s3_bucket.mywebsite.id
-  acl    = "public-read"
-}
-
-
-# Resource-7: aws_s3_bucket_policy
-resource "aws_s3_bucket_policy" "mywebsite" {
-  bucket = aws_s3_bucket.mywebsite.id
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-      {
-          "Sid": "PublicReadGetObject",
-          "Effect": "Allow",
-          "Principal": "*",
-          "Action": [
-              "s3:GetObject"
-          ],
-          "Resource": [
-              "${aws_s3_bucket.mywebsite.arn}/*"
-          ]
-      }
-  ]
-}  
 EOF
-}
+
+
+
 
 
