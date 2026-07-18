@@ -2,7 +2,7 @@
 
 # Resource-1: aws_s3_bucket
 resource "aws_s3_bucket" "mywebsite" {
-  bucket = var.bucket_name  
+  bucket        = "${var.bucket_name}-${random_id.suffix.hex}"
   tags          = var.tags
   force_destroy = true
 }
